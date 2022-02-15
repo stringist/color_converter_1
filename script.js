@@ -18,7 +18,7 @@ function start() {
 
 function updateColor(event) {
     console.log("color", event);
-    let color = `${event.target.value}`;
+    let color = event.target.value;
     document.querySelector("#color-square").style.backgroundColor = color;
     document.querySelector("#HEX").innerHTML = color;
     let rgbColor = hexToRGB(color);
