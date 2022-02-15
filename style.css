@@ -1,0 +1,19 @@
+#color-display {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#color-square {
+    height: 120px;
+    width: 120px;
+    border: solid 1px grey;
+    border-radius: 5px 5px;
+    background-color: #c0ffee;
+}
+
+.color-value {
+    display: flex;
+    gap: 5px;
+}
