@@ -1,33 +1,34 @@
-window.addEventListener("load", start);
+"use strict";
 
+window.addEventListener("DOMContentLoaded", start)
 
-// let colorPicker;
 function start() {
     const colorPicker = document.querySelector("#color-picker");
-    let color = colorPicker.target.value;
-    console.log(color);
-    document.querySelector("#color-square").style.backgroundColor = color;
-    document.querySelector("#HEX").innerHTML = color;
-    let rgbColor = hexToRGB(color);
-    document.querySelector("#RGB").innerHTML = rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b;
-    document.querySelector("#HSL").innerHTML = rgbToHSL(rgbColor.r, rgbColor.g, rgbColor.b);
+    const activeColor = colorPicker.value;
+    getConversions(activeColor);
     colorPicker.addEventListener("input", updateColor);
     colorPicker.addEventListener("change", updateColor);
-    // colorPicker.select();
 }
 
 function updateColor(event) {
-    // console.log("color", event);
-    let color = event.target.value;
-    document.querySelector("#color-square").style.backgroundColor = color;
-    document.querySelector("#HEX").innerHTML = color;
-    let rgbColor = hexToRGB(color);
-    document.querySelector("#RGB").innerHTML = rgbColor.r + ", " + rgbColor.g + ", " + rgbColor.b;
-    document.querySelector("#HSL").innerHTML = rgbToHSL(rgbColor.r, rgbColor.g, rgbColor.b);
-    // document.querySelector("#CSS").innerHTML("")
-    // colorPicker.addEventListener("input", updateColor);
+    const newColor = event.target.value;
+    getConversions(newColor);
 }
 
+function getConversions(hexCode) {
+    const hex = hexCode;
+    const rgb = hexToRGB(hexCode);
+    const hsl = rgbToHSL(rgb.r, rgb.g, rgb.b);
+    const css = RGBToCSS(rgb);
+    displayColor(hex, rgb, hsl, css);
+}
+
+function displayColor(hex, rgb, hsl, css) {
+    document.querySelector("#color-square").style.backgroundColor = hex;
+    document.querySelector("#HEX").innerHTML = hex;
+    document.querySelector("#RGB").innerHTML = rgb.r + ", " + rgb.g + ", " + rgb.b;
+    document.querySelector("#HSL").innerHTML = hsl;
+}
 
 function hexToRGB(hexString) {
     const r = parseInt((hexString.substring(1, 3)), 16);
@@ -41,6 +42,11 @@ function rgbToHex(rgbObject) {
     const hexCode = "#" + rgbObject.r.toString(16) + rgbObject.g.toString(16) + rgbObject.b.toString(16);
     console.log(hexCode);
     return hexCode;
+}
+
+function RGBToCSS(rgb) {
+    const cssString = "rgb(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ")";
+    return cssString;
 }
 
 function cssToRGB(cssString) {

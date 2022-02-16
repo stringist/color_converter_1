@@ -1,6 +1,7 @@
 window.addEventListener("load", randomBackground);
 
 function randomBackground() {
+
     const cssColor = RGBToCSS(randomColor());
     console.log(cssColor);
     document.querySelector(".color-container").style.backgroundColor = cssColor;
